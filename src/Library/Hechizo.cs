@@ -9,7 +9,7 @@ namespace Library
         public int Ataque {get; set private;}
         public int Defensa {get ;set private;}
         
-        public Hechizo(string Nombre ,int Ataque, int Defensa)
+        public Hechizo(string pnombre ,int pataque, int pdefensa)
         {
             this.Nombre=pnombre;
             this.Ataque=pataque;
