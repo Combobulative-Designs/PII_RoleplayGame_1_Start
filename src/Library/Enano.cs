@@ -63,11 +63,11 @@ namespace Library
         */
         public void Ataque(Elemento pElem, Elfo pElfo, Enano pEnano, Arquero pArquero, Mago pMago)
         {
-            if(TieneElElemento(this.Items,Elemento)==true)
+            if(TieneElElemento(this.Items,pElem)==true)
             {
-                if(pElfo!=NULL)
+                if(pElfo!=null)
                 {
-                    if(pEnano==NULL && pArquero==NULL && pMago==NULL)
+                    if(pEnano==null && pArquero==null && pMago==null)
                     {
                         int xDefensaElfo=pElfo.CalcularDefensa();
                         int xDañoElemento=pElem.Ataque;
@@ -78,9 +78,9 @@ namespace Library
                         }
                     }
                 }
-                else if (pEnano!=NULL)
+                else if (pEnano!=null)
                 {
-                    if(pElfo==NULL && pArquero==NULL && pMago==NULL)
+                    if(pElfo==null && pArquero==null && pMago==null)
                     {
                         int xDefensaEnano=pEnano.CalcularDefensa();
                         int xDañoElemento=pElem.Ataque;
@@ -91,9 +91,9 @@ namespace Library
                         }
                     }
                 }
-                else if (pArquero!=NULL)
+                else if (pArquero!=null)
                 {
-                    if(pElfo==NULL && pEnano==NULL && pMago==NULL)
+                    if(pElfo==null && pEnano==null && pMago==null)
                     {
                         int xDefensaArquero=pArquero.CalcularDefensa();
                         int xDañoElemento=pElem.Ataque;
@@ -104,9 +104,9 @@ namespace Library
                         }
                     }
                 }
-                else if (pMago!=NULL)
+                else if (pMago!=null)
                 {
-                    if(pElfo==NULL && pEnano==NULL && pArquero==NULL)
+                    if(pElfo==null && pEnano==null && pArquero==null)
                     {
                         int xDefensaMago=pMago.CalcularDefensa();
                         int xDañoElemento=pElem.Ataque;
@@ -129,6 +129,7 @@ namespace Library
                     xretorno=true;   
                 }
             }
+            return xretorno;
         }
 
     }
