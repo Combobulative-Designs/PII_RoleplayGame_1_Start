@@ -16,6 +16,8 @@ namespace Library
             this.Nombre=pnombre;
             this.Vida=pvida;
             this.Items=new ArrayList();
+
+            personajes.Add(this);
         }
 
         public void QuitarElemetno(Elemento pElemento)
@@ -101,6 +103,14 @@ namespace Library
                     pMago.Vida=xVidaEnemigo;
                 }
             }
+        }
+        public static Enano GetPersonaje(string nombre)
+        {
+            return personajes.Find(match => match.Nombre == nombre.Trim());
+        }
+        public static List<Enano> GetPersonajes()
+        {
+            return personajes;
         }
 
     }
