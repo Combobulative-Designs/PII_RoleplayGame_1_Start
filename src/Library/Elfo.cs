@@ -6,7 +6,7 @@ namespace Library
 {
     public class Elfo
     {
-        private static List<Elfo> personajes;
+        private static List<Elfo> personajes = new List<Elfo>();
 
         public string Nombre { get; private set; }
         public int Vida { get; set; }
