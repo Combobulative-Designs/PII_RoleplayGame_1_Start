@@ -5,9 +5,9 @@ namespace Library
 {
     public class Hechizo
     {
-        public string Nombre{get; set private;}
-        public int Ataque {get; set private;}
-        public int Defensa {get ;set private;}
+        public string Nombre{get; private set;}
+        public int Ataque {get; private set;}
+        public int Defensa {get; private set;}
         
         public Hechizo(string pnombre ,int pataque, int pdefensa)
         {

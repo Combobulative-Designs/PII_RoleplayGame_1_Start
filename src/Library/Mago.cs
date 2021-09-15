@@ -14,14 +14,14 @@ namespace Library
         public string Nombre { get; private set; }
         public int Vida { get; set; }
         public ArrayList Items { get; private set; }
-        public ArrayLIst Hechizos { get; private set}
+        public ArrayList Hechizos { get; private set; }
 
    /// <summary>
    /// constructor del mago
    /// </summary>
    /// <param name="nombre"> nombre del mago</param>
    /// <param name="vida">vida del mago</param>
-        public Arquero(string nombre, int vida)
+        public Mago(string nombre, int vida)
         {
             this.Nombre = nombre;
             this.Vida = vida;
@@ -32,7 +32,7 @@ namespace Library
         }
         public void QuitarHechizo(Hechizo hechizo)
         {
-            if (this.Hechizos.Contains(hechizo}))
+            if (this.Hechizos.Contains(hechizo))
                 this.Hechizos.Remove(hechizo);
         }
 
@@ -47,7 +47,7 @@ namespace Library
         }
         public void AgregarHechizo(Hechizo hechizo)
         {
-         if (!this.Hechizos.Contains(hechizo}))
+         if (!this.Hechizos.Contains(hechizo))
                 this.Hechizos.Add(hechizo);
         }
 
@@ -73,8 +73,8 @@ namespace Library
         }
         public double CalcularPotenciador()
         {
-            double resultado=1
-            foreach (Elemento item in this.items)           
+            double resultado=1;
+            foreach (Elemento item in this.Items)           
             {
                 if (item.Potenciador >0)
                 {
@@ -99,7 +99,7 @@ namespace Library
             if (Object.ReferenceEquals(this, objetivo))
                 return;
 
-            int daño = hechizo.Ataque*this.CalcularPotenciador() - objetivo.CalcularDefensa();
+            int daño = (int)(hechizo.Ataque*this.CalcularPotenciador()) - objetivo.CalcularDefensa();
 
             if (daño > 0)
                 objetivo.Vida = (objetivo.Vida > daño) ? objetivo.Vida - daño : 0;  
@@ -114,7 +114,7 @@ namespace Library
             if (Object.ReferenceEquals(this, objetivo))
                 return;
 
-            int daño = hechizo.Ataque*this.CalcularPotenciador() - objetivo.CalcularDefensa();
+            int daño = (int)(hechizo.Ataque*this.CalcularPotenciador()) - objetivo.CalcularDefensa();
 
             if (daño > 0)
                 objetivo.Vida = (objetivo.Vida > daño) ? objetivo.Vida - daño : 0;  
@@ -129,7 +129,7 @@ namespace Library
             if (Object.ReferenceEquals(this, objetivo))
                 return;
 
-            int daño = hechizo.Ataque*this.CalcularPotenciador() - objetivo.CalcularDefensa();
+            int daño = (int)(hechizo.Ataque*this.CalcularPotenciador()) - objetivo.CalcularDefensa();
 
             if (daño > 0)
                 objetivo.Vida = (objetivo.Vida > daño) ? objetivo.Vida - daño : 0;  
@@ -144,7 +144,7 @@ namespace Library
             if (Object.ReferenceEquals(this, objetivo))
                 return;
 
-            int daño = hechizo.Ataque*this.CalcularPotenciador() - objetivo.CalcularDefensa();
+            int daño = (int)(hechizo.Ataque*this.CalcularPotenciador()) - objetivo.CalcularDefensa();
 
             if (daño > 0)
                 objetivo.Vida = (objetivo.Vida > daño) ? objetivo.Vida - daño : 0;  
