@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Library
 {
     public class Enano
     {
+        private static List<Enano> personajes = new List<Enano>();
         public string Nombre{get; set;}
         public int Vida{get; set;}
         public ArrayList Items;
