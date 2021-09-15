@@ -9,7 +9,7 @@ namespace Library
     /// </summary>
     public class Mago
     {
-        private static List<Mago> personajes;
+        private static List<Mago> personajes = new List<Mago>();
 
         public string Nombre { get; private set; }
         public int Vida { get; set; }

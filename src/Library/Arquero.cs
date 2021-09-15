@@ -9,7 +9,7 @@ namespace Library
     /// </summary>
     public class Arquero
     {
-        private static List<Arquero> personajes;
+        private static List<Arquero> personajes = new List<Arquero>();
 
         public string Nombre { get; private set; }
         public int Vida { get; set; }
