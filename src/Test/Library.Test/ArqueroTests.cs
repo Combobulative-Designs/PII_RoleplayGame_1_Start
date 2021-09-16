@@ -5,6 +5,11 @@ namespace Test.Library
 {
     public class ArqueroTests
     {
+        /// <summary>
+        /// Test de creacion de arquero. Revisa si los valores
+        /// en las propiedades de la instancia creada son los 
+        /// provistos al constructor.
+        /// </summary>
         [Test]
         public void TestCrearArquero()
         {
@@ -17,6 +22,13 @@ namespace Test.Library
             Assert.AreEqual(vidaInicial, arquero.Vida);
         }
 
+        /// <summary>
+        /// Test de agregar elementos. Crea un elemento
+        /// y prueba agregarlo al personaje. Luego testea
+        /// si la cuenta de items incremento en 1, y si 
+        /// el item se encuentra en la lista de items del 
+        /// personaje.
+        /// </summary>
         [Test]
         public void TestAgregarElemento()
         {
@@ -27,9 +39,16 @@ namespace Test.Library
             arquero.AgregarElemento(elemento);
 
             Assert.AreEqual((itemCount + 1), arquero.Items.Count);
-            Assert.AreSame(elemento, (Elemento)arquero.Items[0]);
+            Assert.Contains(elemento, arquero.Items);
         }
 
+        /// <summary>
+        /// Test de quitar elementos. Crea un elemento, lo añade
+        /// al personaje e intenta removerlo finalmente. Prueba si
+        /// la cantidad de elementos decrecio en 1 luego de remover
+        /// el item, y si ninguno de los items restantes es identico
+        /// al removido.
+        /// </summary>
         [Test]
         public void TestQuitarElemento()
         {
@@ -51,6 +70,13 @@ namespace Test.Library
             }
         }
 
+        /// <summary>
+        /// Test de atacar a un arquero. Crea 2 personajes y 
+        /// un elemento con ataque, añade el elemento a uno de
+        /// los personajes, y ataca con ese personaje al otro.
+        /// Prueba que la vida restante del personaje atacado
+        /// sea igual a la vida inicial menos el daño del ataque.
+        /// </summary>
         [Test]
         public void TestAtacarArquero()
         {
@@ -68,6 +94,13 @@ namespace Test.Library
             Assert.AreEqual(vidaRestante, arquero2.Vida);
         }
 
+        /// <summary>
+        /// Test de atacar a un elfo. Crea 2 personajes y 
+        /// un elemento con ataque, añade el elemento a uno de
+        /// los personajes, y ataca con ese personaje al otro.
+        /// Prueba que la vida restante del personaje atacado
+        /// sea igual a la vida inicial menos el daño del ataque.
+        /// </summary>
         [Test]
         public void TestAtacarElfo()
         {
@@ -85,6 +118,13 @@ namespace Test.Library
             Assert.AreEqual(vidaRestante, elfo1.Vida);
         }
 
+        /// <summary>
+        /// Test de atacar a un enano. Crea 2 personajes y 
+        /// un elemento con ataque, añade el elemento a uno de
+        /// los personajes, y ataca con ese personaje al otro.
+        /// Prueba que la vida restante del personaje atacado
+        /// sea igual a la vida inicial menos el daño del ataque.
+        /// </summary>
         [Test]
         public void TestAtacarEnano()
         {
@@ -102,6 +142,13 @@ namespace Test.Library
             Assert.AreEqual(vidaRestante, enano1.Vida);
         }
 
+        /// <summary>
+        /// Test de atacar a un mago. Crea 2 personajes y 
+        /// un elemento con ataque, añade el elemento a uno de
+        /// los personajes, y ataca con ese personaje al otro.
+        /// Prueba que la vida restante del personaje atacado
+        /// sea igual a la vida inicial menos el daño del ataque.
+        /// </summary>
         [Test]
         public void TestAtacarMago()
         {
@@ -119,6 +166,12 @@ namespace Test.Library
             Assert.AreEqual(vidaRestante, mago1.Vida);
         }
 
+        /// <summary>
+        /// Test del calculo de defensa. Crea un personaje y
+        /// varios items con puntos de defensa para añadir a 
+        /// este. Prueba si el resultado del metodo CalcularDefensa()
+        /// es equivalente a la suma de la defensa de los items.
+        /// </summary>
         [Test]
         public void TestCalcularDefensa()
         {
@@ -135,6 +188,13 @@ namespace Test.Library
             Assert.AreEqual(defensaTotalEsperada, arquero1.CalcularDefensa());
         }
 
+        /// <summary>
+        /// Test de defender un ataque. Crea dos personajes, uno
+        /// con items de defensa y otro con items de ataque. Luego
+        /// ataca con el segundo al primero. Prueba si la vida restante
+        /// del primer personaje es equivalente a su vida inicial menos
+        /// resta de su defensa al ataque del segundo personaje.
+        /// </summary>
         [Test]
         public void TestDefender()
         {
@@ -160,6 +220,12 @@ namespace Test.Library
             Assert.AreEqual(vidaRestante, arquero1.Vida);
         }
 
+        /// <summary>
+        /// Prueba de la accion Heal. Crea un personaje con su
+        /// vida inicial, disminuye su vida, y luego ejecuta el 
+        /// metodo Heal(). Prueba si la vida final luego del Heal
+        /// es igual a su vida inicial.
+        /// </summary>
         [Test]
         public void TestHeal()
         {
