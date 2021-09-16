@@ -13,7 +13,7 @@ namespace Test.Library
             string vNombre = "Mago De Prueba";
             int vVida = 100;
 
-            var elmago = new Mago(Nombre, Vida);
+            var elmago = new Mago(vNombre, vVida);
 
             Assert.AreEqual(vNombre, elmago.Nombre);
             Assert.AreEqual(vVida, elmago.Vida);
@@ -22,8 +22,8 @@ namespace Test.Library
         [Test]
         public void TestAgregarElemento()
         {
-            var mago= new Mago("Mago Nuevo ", 100);
-            var varita = new Elemento("varita",1.5,0,0);
+            var mago = new Mago("Mago Nuevo ", 100);
+            var varita = new Elemento("varita", 1.5, 0, 0);
             int Contador = mago.Items.Count;
 
             mago.AgregarElemento(varita);
@@ -34,11 +34,11 @@ namespace Test.Library
         [Test]
         public void TestAgregarHechizo()
         {
-            var mago= new Mago("Mago Nuevo ", 100);
-            var hechizo = new Hechizo("expeliarmus",60);
+            var mago = new Mago("Mago Nuevo ", 100);
+            var hechizo = new Hechizo("expeliarmus", 60);
             int Contador = mago.Items.Count;
 
-            mago.AgregarHechizo(varita);
+            mago.AgregarHechizo(hechizo);
 
             Assert.AreEqual((Contador + 1), mago.Hechizos.Count);
             Assert.Contains(hechizo, mago.Hechizos);
@@ -46,7 +46,7 @@ namespace Test.Library
         [Test]
         public void TestQuitarElemento()
         {
-            var mago= new Mago("Mago Nuevo ", 100);
+            var mago = new Mago("Mago Nuevo ", 100);
             var elemento1 = new Elemento("VARITA1", 1.5, 0, 0);
             var elemento2 = new Elemento("VARITA2", 1.5, 0, 0);
             var elemento3 = new Elemento("VARITA3", 1.5, 0, 0);
@@ -67,13 +67,13 @@ namespace Test.Library
         [Test]
         public void TestQuitarHechizo()
         {
-            var mago= new Mago("Mago Nuevo ", 100);
-            var hechizo1 = new Hechizo("expeliarmus1",60);
-            var hechizo2 = new Hechizo("expeliarmus2",60);
-            var hechizo3 = new Hechizo("expeliarmus3",60);
-            mago.AgregarElemento(hechizo1);
-            mago.AgregarElemento(hechizo2);
-            mago.AgregarElemento(hechizo3);
+            var mago = new Mago("Mago Nuevo ", 100);
+            var hechizo1 = new Hechizo("expeliarmus1", 60);
+            var hechizo2 = new Hechizo("expeliarmus2", 60);
+            var hechizo3 = new Hechizo("expeliarmus3", 60);
+            mago.AgregarHechizo(hechizo1);
+            mago.AgregarHechizo(hechizo2);
+            mago.AgregarHechizo(hechizo3);
             int contador = mago.Hechizos.Count;
 
             mago.QuitarHechizo(hechizo2);
@@ -94,11 +94,11 @@ namespace Test.Library
 
             var mago = new Mago("Merlin", 78);
             var arquero = new Arquero("Arash", vidaInicial);
-            var hechizo = new Hechizo("poder",ataque);
+            var hechizo = new Hechizo("poder", ataque);
             var elemento = new Elemento("VARITA3", 1.5, 0, 0);
             mago.AgregarElemento(elemento);
             mago.AgregarHechizo(hechizo);
-            
+
 
             mago.Ataque(hechizo, arquero);
 
@@ -114,7 +114,7 @@ namespace Test.Library
 
             var mago = new Mago("Merlin", 78);
             var elfo = new Elfo("elfo", vidaInicial);
-            var hechizo = new Hechizo("poder",ataque);
+            var hechizo = new Hechizo("poder", ataque);
             var elemento = new Elemento("VARITA3", 1.5, 0, 0);
             mago.AgregarElemento(elemento);
             mago.AgregarHechizo(hechizo);
@@ -133,7 +133,7 @@ namespace Test.Library
 
             var mago = new Mago("Merlin", 78);
             var enano = new Enano("enano", vidaInicial);
-            var hechizo = new Hechizo("poder",ataque);
+            var hechizo = new Hechizo("poder", ataque);
             var elemento = new Elemento("VARITA3", 1.5, 0, 0);
             mago.AgregarElemento(elemento);
             mago.AgregarHechizo(hechizo);
@@ -151,8 +151,8 @@ namespace Test.Library
 
 
             var mago1 = new Mago("Merlin", 78);
-            var mago2= new Mago("mago", vidaInicial);
-            var hechizo = new Hechizo("poder",ataque);
+            var mago2 = new Mago("mago", vidaInicial);
+            var hechizo = new Hechizo("poder", ataque);
             var elemento = new Elemento("VARITA3", 1.5, 0, 0);
             mago1.AgregarElemento(elemento);
             mago1.AgregarHechizo(hechizo);
@@ -161,7 +161,7 @@ namespace Test.Library
 
             Assert.AreEqual(vidaRestante, mago2.Vida);
         }
-       [Test]
+        [Test]
         public void TestCalcularDefensa()
         {
             int defensa1 = 20;
@@ -205,10 +205,10 @@ namespace Test.Library
             mago1.AgregarElemento(elemento2);
 
             var mago2 = new Mago("mago3", 87);
-            var elemento3 = new Elemento("el3", 0, ataque, 0);
-            mago2.AgregarElemento(elemento3);
+            var hechizo = new Hechizo("el3",ataque);
+            mago2.AgregarHechizo(hechizo);
 
-            mago2.Ataque(elemento3, mago1);
+            mago2.Ataque(hechizo, mago1);
 
             Assert.AreEqual(vidaRestante, mago1.Vida);
         }
