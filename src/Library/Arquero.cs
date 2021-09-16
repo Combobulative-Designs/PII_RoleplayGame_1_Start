@@ -14,6 +14,7 @@ namespace Library
         public string Nombre { get; private set; }
         public int Vida { get; set; }
         public ArrayList Items { get; private set; }
+        public int VidaInicial { get; private set; }
 
         /// <summary>
         /// Constructor de la clase. Al crear una instancia
@@ -25,9 +26,15 @@ namespace Library
         {
             this.Nombre = nombre;
             this.Vida = vida;
+            this.VidaInicial = vida;
             this.Items = new ArrayList();
 
             personajes.Add(this);
+        }
+
+        ~Arquero()
+        {
+            personajes.Remove(this);
         }
 
         /// <summary>
@@ -139,6 +146,14 @@ namespace Library
 
             if (daño > 0)
                 objetivo.Vida = (objetivo.Vida > daño) ? objetivo.Vida - daño : 0;  
+        }
+        
+        /// <summary>
+        /// Reinicia la vida del personaje a su vida inicial.
+        /// </summary>
+        public void Heal()
+        {
+            this.Vida = this.VidaInicial;
         }
 
         /// <summary>
