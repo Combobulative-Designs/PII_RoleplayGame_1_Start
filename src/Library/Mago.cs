@@ -13,8 +13,11 @@ namespace Library
 
         public string Nombre { get; private set; }
         public int Vida { get; set; }
+        public int VidaInicial{get; private set ;}
         public ArrayList Items { get; private set; }
         public ArrayList Hechizos { get; private set; }
+
+
 
    /// <summary>
    /// constructor del mago
@@ -27,6 +30,7 @@ namespace Library
             this.Vida = vida;
             this.Items = new ArrayList();
             this.Hechizos = new ArrayList();
+            this.VidaInicial=vida;
 
             personajes.Add(this);
         }
@@ -150,7 +154,11 @@ namespace Library
                 objetivo.Vida = (objetivo.Vida > daño) ? objetivo.Vida - daño : 0;  
         }
 
-   
+        
+        public void Heal()
+        {
+            this.Vida= this.VidaInicial;
+        }
         public static Mago GetPersonaje(string nombre)
         {
             return personajes.Find(match => match.Nombre == nombre.Trim());
