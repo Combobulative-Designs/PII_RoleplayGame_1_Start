@@ -11,11 +11,13 @@ namespace Library
         public string Nombre { get; private set; }
         public int Vida { get; set; }
         public ArrayList Items { get; private set; }
+        public int VidaInicial { get; private set; }
         public Elfo(string Nombre, int Vida)
         {
             this.Nombre = Nombre;
             this.Vida = Vida;
             this.Items = new ArrayList();
+            this.VidaInicial = Vida;
 
             personajes.Add(this);
 
@@ -139,6 +141,11 @@ namespace Library
         public static List<Elfo> GetPersonajes()
         {
             return personajes;
+        }
+
+        public void Heal()
+        {
+            this.Vida = this.VidaInicial;
         }
 
     }
