@@ -13,8 +13,8 @@ namespace Test.Library
 
             var arquero = new Arquero(nombre, vidaInicial);
 
-            Assert.AreEqual(arquero.Nombre, nombre);
-            Assert.AreEqual(arquero.Vida, vidaInicial);
+            Assert.AreEqual(nombre, arquero.Nombre);
+            Assert.AreEqual(vidaInicial, arquero.Vida);
         }
 
         [Test]
@@ -26,8 +26,8 @@ namespace Test.Library
 
             arquero.AgregarElemento(elemento);
 
-            Assert.AreEqual(arquero.Items.Count, (itemCount + 1));
-            Assert.AreSame((Elemento)arquero.Items[0], elemento);
+            Assert.AreEqual((itemCount + 1), arquero.Items.Count);
+            Assert.AreSame(elemento, (Elemento)arquero.Items[0]);
         }
 
         [Test]
@@ -44,10 +44,10 @@ namespace Test.Library
 
             arquero.QuitarElemento(elemento2);
 
-            Assert.AreEqual(arquero.Items.Count, (itemCount - 1));
+            Assert.AreEqual((itemCount - 1), arquero.Items.Count);
             foreach (Elemento elemento in arquero.Items)
             {
-                Assert.AreNotSame(elemento, elemento2);
+                Assert.AreNotSame(elemento2, elemento);
             }
         }
 
@@ -65,7 +65,7 @@ namespace Test.Library
 
             arquero1.Ataque(elemento, arquero2);
 
-            Assert.AreEqual(arquero2.Vida, vidaRestante);
+            Assert.AreEqual(vidaRestante, arquero2.Vida);
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace Test.Library
 
             arquero1.Ataque(elemento, elfo1);
 
-            Assert.AreEqual(elfo1.Vida, vidaRestante);
+            Assert.AreEqual(vidaRestante, elfo1.Vida);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace Test.Library
 
             arquero1.Ataque(elemento, enano1);
 
-            Assert.AreEqual(enano1.Vida, vidaRestante);
+            Assert.AreEqual(vidaRestante, enano1.Vida);
         }
 
         [Test]
@@ -116,7 +116,7 @@ namespace Test.Library
 
             arquero1.Ataque(elemento, mago1);
 
-            Assert.AreEqual(mago1.Vida, vidaRestante);
+            Assert.AreEqual(vidaRestante, mago1.Vida);
         }
 
         [Test]
@@ -125,27 +125,50 @@ namespace Test.Library
             int defensa1 = 20;
             int defensa2 = 45;
             int defensaTotalEsperada = defensa1 + defensa2;
+
             var arquero1 = new Arquero("Emiya Shirou", 91);
             var elemento1 = new Elemento("Holy Shroud", 0, 0, defensa1);
             var elemento2 = new Elemento("Rho Aias", 0, 0, defensa2);
             arquero1.AgregarElemento(elemento1);
             arquero1.AgregarElemento(elemento2);
 
-            Assert.AreEqual(arquero1.CalcularDefensa(), defensaTotalEsperada);
+            Assert.AreEqual(defensaTotalEsperada, arquero1.CalcularDefensa());
         }
 
         [Test]
         public void TestDefender()
         {
-            int defensa1 = 20;
-            int defensa2 = 45;
+            int vidaInicial = 75;
+            int defensa1 = 10;
+            int defensa2 = 15;
             int defensaTotalEsperada = defensa1 + defensa2;
-            var arquero1 = new Arquero("Emiya Shirou", 91);
+            int ataque = 45;
+            int vidaRestante = vidaInicial - (ataque - defensaTotalEsperada);
+
+            var arquero1 = new Arquero("Chloe von Einzbern", vidaInicial);
             var elemento1 = new Elemento("Holy Shroud", 0, 0, defensa1);
             var elemento2 = new Elemento("Rho Aias", 0, 0, defensa2);
             arquero1.AgregarElemento(elemento1);
             arquero1.AgregarElemento(elemento2);
 
+            var arquero2 = new Arquero("Robin Hood", 87);
+            var elemento3 = new Elemento("Yew Bow", 0, ataque, 0);
+            arquero2.AgregarElemento(elemento3);
+
+            arquero2.Ataque(elemento3, arquero1);
+
+            Assert.AreEqual(vidaRestante, arquero1.Vida);
+        }
+
+        [Test]
+        public void TestHeal()
+        {
+            var arquero1 = new Arquero("William Tell", 93);
+
+            arquero1.Vida = 0;
+            arquero1.Heal();
+
+            Assert.AreEqual(arquero1.VidaInicial, arquero1.Vida);
         }
     }
 }
