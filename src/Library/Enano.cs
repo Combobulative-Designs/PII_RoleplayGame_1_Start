@@ -7,19 +7,38 @@ namespace Library
     public class Enano
     {
         private static List<Enano> personajes = new List<Enano>();
-        public string Nombre{get; set;}
+        public string Nombre{get; private set;}
         public int Vida{get; set;}
         public ArrayList Items;
-        
+        public int VidaInicial{get; private set;}
+
+
+       /// <summary>
+        /// Constructor de la clase. Al crear una instancia
+        /// la añade a la variable de clase 'personajes'
+        /// </summary>
+        /// <param name="nombre">string: Nombre del personaje.</param>
+        /// <param name="vida">int: Vida del personaje.</param> 
         public Enano(string pnombre,int pvida)
         {
             this.Nombre=pnombre;
             this.Vida=pvida;
             this.Items=new ArrayList();
+            this.VidaInicial=pvida;
 
             personajes.Add(this);
         }
+        
+        //Destructor
+        ~Enano()
+        {
+            personajes.Remove(this);
+        }
 
+        /// <summary>
+        /// Des-equipar un item del personaje.
+        /// </summary>
+        /// <param name="pElemento">Elemento: item a des-equipar.</param>
         public void QuitarElemetno(Elemento pElemento)
         {
            if(this.Items.Contains(pElemento))
@@ -28,6 +47,10 @@ namespace Library
            }
         }
         
+        /// <summary>
+        /// Equipar un item al personaje.
+        /// </summary>
+        /// <param name="pElemento">Elemento: item a equipar.</param>
         public void AgregarElemento(Elemento pElemento)
         {
             if(!this.Items.Contains(pElemento))
@@ -36,6 +59,11 @@ namespace Library
             }
         }
         
+        /// <summary>
+        /// Devuelve la defensa combinada de todos los
+        /// items equipados.
+        /// </summary>
+        /// <returns>int: defensa calculada.</returns>
         public int CalcularDefensa()
         {
             int xretorno=0;
@@ -45,7 +73,12 @@ namespace Library
             }
             return xretorno;
         }
-        //Ataque a Arquero
+
+        /// <summary>
+        /// Atacar a un arquero con un item equipado.
+        /// </summary>
+        /// <param name="pElem">Elemento: item a utilizar para el ataque.</param>
+        /// <param name="pArquero">Arquero: personaje objetivo a atacar.</param>
         public void Ataque(Elemento pElem, Arquero pArquero)
         {
             if(this.Items.Contains(pElem))
@@ -60,22 +93,33 @@ namespace Library
             }
         }
 
-        //Ataque a Enano
+        /// <summary>
+        /// Atacar a un enano con un item equipado.
+        /// </summary>
+        /// <param name="pElem">Elemento: item a utilizar para el ataque.</param>
+        /// <param name="pEnano">Enano: personaje objetivo a atacar.</param>
         public void Ataque(Elemento pElem, Enano pEnano)
         {
             if(this.Items.Contains(pElem))
             {
-                int xDefensaEnano=pEnano.CalcularDefensa();
-                int xDañoElemento=pElem.Ataque;
-                if(xDefensaEnano<xDañoElemento)
+                if(!Object.ReferenceEquals(this,pEnano))
                 {
-                    int xVidaEnemigo=pEnano.Vida-(xDañoElemento-xDefensaEnano);
-                    pEnano.Vida=xVidaEnemigo;
+                    int xDefensaEnano=pEnano.CalcularDefensa();
+                    int xDañoElemento=pElem.Ataque;
+                    if(xDefensaEnano<xDañoElemento)
+                    {
+                        int xVidaEnemigo=pEnano.Vida-(xDañoElemento-xDefensaEnano);
+                        pEnano.Vida=xVidaEnemigo;
+                    }
                 }
             }
         }
 
-        //Ataque Elfo
+        /// <summary>
+        /// Atacar a un elfo con un item equipado.
+        /// </summary>
+        /// <param name="pElem">Elemento: item a utilizar para el ataque.</param>
+        /// <param name="pElfo">Elfo: personaje objetivo a atacar.</param>
         public void Ataque(Elemento pElem, Elfo pElfo)
         {
             if(this.Items.Contains(pElem))
@@ -90,7 +134,11 @@ namespace Library
             }
         }
 
-        //Ataque Mago
+        /// <summary>
+        /// Atacar a un mago con un item equipado.
+        /// </summary>
+        /// <param name="pElem">Elemento: item a utilizar para el ataque.</param>
+        /// <param name="pMago">Mago: personaje objetivo a atacar.</param>
         public void Ataque(Elemento pElem, Mago pMago)
         {
             if(this.Items.Contains(pElem))
@@ -104,10 +152,29 @@ namespace Library
                 }
             }
         }
-        public static Enano GetPersonaje(string nombre)
+
+        /// <summary>
+        /// Reinicia la vida del personaje a su vida inicial.
+        /// </summary>
+        public void Heal()
         {
-            return personajes.Find(match => match.Nombre == nombre.Trim());
+            this.Vida = this.VidaInicial;
         }
+
+        /// <summary>
+        /// Devuelve un Enano por su nombre.
+        /// </summary>
+        /// <param name="pNombre">string: nombre del arquero a devolver.</param>
+        /// <returns>Enano: personaje encontrado.</returns>
+        public static Enano GetPersonaje(string pNombre)
+        {
+            return personajes.Find(match => match.Nombre == pNombre.Trim());
+        }
+
+        /// <summary>
+        /// Devuelve la lista de enanos creados.
+        /// </summary>
+        /// <returns>List: listado de enanos.</returns>
         public static List<Enano> GetPersonajes()
         {
             return personajes;
