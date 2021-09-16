@@ -20,7 +20,7 @@ namespace Library
             personajes.Add(this);
         }
 
-        public void QuitarElemetno(Elemento pElemento)
+        public void QuitarElemento(Elemento pElemento)
         {
            if(this.Items.Contains(pElemento))
            {
@@ -104,6 +104,7 @@ namespace Library
                 }
             }
         }
+        
         public static Enano GetPersonaje(string nombre)
         {
             return personajes.Find(match => match.Nombre == nombre.Trim());
