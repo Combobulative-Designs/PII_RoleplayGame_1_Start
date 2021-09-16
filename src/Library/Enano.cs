@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Library
 {
     public class Enano
     {
+        private static List<Enano> personajes = new List<Enano>();
         public string Nombre{get; set;}
         public int Vida{get; set;}
         public ArrayList Items;
@@ -14,33 +16,21 @@ namespace Library
             this.Nombre=pnombre;
             this.Vida=pvida;
             this.Items=new ArrayList();
+
+            personajes.Add(this);
         }
 
         public void QuitarElemetno(Elemento pElemento)
         {
-            int xcont=0;
-            foreach (Elemento elem in this.Items)
-            {
-
-                if(pElemento==elem)
-                {
-                    this.Items.Remove(elem);
-                }
-                xcont++;
-            }
+           if(this.Items.Contains(pElemento))
+           {
+               this.Items.Remove(pElemento);
+           }
         }
         
         public void AgregarElemento(Elemento pElemento)
         {
-            bool xesta=false;
-            foreach (Elemento elem in this.Items)
-            {
-                if(pElemento==elem)
-                {
-                    xesta=true;
-                }
-            }
-            if(xesta==false)
+            if(!this.Items.Contains(pElemento))
             {
                 this.Items.Add(pElemento);
             }
@@ -55,81 +45,72 @@ namespace Library
             }
             return xretorno;
         }
-
-        /*  Revisar que solo ataque a un personaje
-            Revisar que el elemento con el que se ataca lo tenga el personaje que ataca.
-            Si el daño del elemento es menor a la defensa del otro personaje entonces no resta nada.
-            Si el daño del elemento es mayor que la defensa del otro persoanje entonces le resta la vida
-        */
-        public void Ataque(Elemento pElem, Elfo pElfo, Enano pEnano, Arquero pArquero, Mago pMago)
+        //Ataque a Arquero
+        public void Ataque(Elemento pElem, Arquero pArquero)
         {
-            if(TieneElElemento(this.Items,pElem)==true)
+            if(this.Items.Contains(pElem))
             {
-                if(pElfo!=null)
+                int xDefensaArquero=pArquero.CalcularDefensa();
+                int xDañoElemento=pElem.Ataque;
+                if(xDefensaArquero<xDañoElemento)
                 {
-                    if(pEnano==null && pArquero==null && pMago==null)
-                    {
-                        int xDefensaElfo=pElfo.CalcularDefensa();
-                        int xDañoElemento=pElem.Ataque;
-                        if(xDefensaElfo<xDañoElemento)
-                        {
-                            int xVidaEnemigo=pElfo.Vida-(xDañoElemento-xDefensaElfo);
-                            pElfo.Vida=xVidaEnemigo;
-                        }
-                    }
-                }
-                else if (pEnano!=null)
-                {
-                    if(pElfo==null && pArquero==null && pMago==null)
-                    {
-                        int xDefensaEnano=pEnano.CalcularDefensa();
-                        int xDañoElemento=pElem.Ataque;
-                        if(xDefensaEnano<xDañoElemento)
-                        {
-                            int xVidaEnemigo=pEnano.Vida-(xDañoElemento-xDefensaEnano);
-                            pEnano.Vida=xVidaEnemigo;
-                        }
-                    }
-                }
-                else if (pArquero!=null)
-                {
-                    if(pElfo==null && pEnano==null && pMago==null)
-                    {
-                        int xDefensaArquero=pArquero.CalcularDefensa();
-                        int xDañoElemento=pElem.Ataque;
-                        if(xDefensaArquero<xDañoElemento)
-                        {
-                            int xVidaEnemigo=pArquero.Vida-(xDañoElemento-xDefensaArquero);
-                            pArquero.Vida=xVidaEnemigo;
-                        }
-                    }
-                }
-                else if (pMago!=null)
-                {
-                    if(pElfo==null && pEnano==null && pArquero==null)
-                    {
-                        int xDefensaMago=pMago.CalcularDefensa();
-                        int xDañoElemento=pElem.Ataque;
-                        if(xDefensaMago<xDañoElemento)
-                        {
-                            int xVidaEnemigo=pMago.Vida-(xDañoElemento-xDefensaMago);
-                            pMago.Vida=xVidaEnemigo;
-                        }
-                    }
+                    int xVidaEnemigo=pArquero.Vida-(xDañoElemento-xDefensaArquero);
+                    pArquero.Vida=xVidaEnemigo;
                 }
             }
         }
-        public bool TieneElElemento(ArrayList pItems,Elemento pElemento)
+
+        //Ataque a Enano
+        public void Ataque(Elemento pElem, Enano pEnano)
         {
-            bool xretorno=false;
-            foreach (Elemento elem in pItems)
+            if(this.Items.Contains(pElem))
             {
-                if(elem==pElemento)
+                int xDefensaEnano=pEnano.CalcularDefensa();
+                int xDañoElemento=pElem.Ataque;
+                if(xDefensaEnano<xDañoElemento)
                 {
-                    xretorno=true;   
+                    int xVidaEnemigo=pEnano.Vida-(xDañoElemento-xDefensaEnano);
+                    pEnano.Vida=xVidaEnemigo;
                 }
             }
-            return xretorno;
+        }
+
+        //Ataque Elfo
+        public void Ataque(Elemento pElem, Elfo pElfo)
+        {
+            if(this.Items.Contains(pElem))
+            {
+                int xDefensaElfo=pElfo.CalcularDefensa();
+                int xDañoElemento=pElem.Ataque;
+                if(xDefensaElfo<xDañoElemento)
+                {
+                    int xVidaEnemigo=pElfo.Vida-(xDañoElemento-xDefensaElfo);
+                    pElfo.Vida=xVidaEnemigo;
+                }
+            }
+        }
+
+        //Ataque Mago
+        public void Ataque(Elemento pElem, Mago pMago)
+        {
+            if(this.Items.Contains(pElem))
+            {
+                int xDefensaMago=pMago.CalcularDefensa();
+                int xDañoElemento=pElem.Ataque;
+                if(xDefensaMago<xDañoElemento)
+                {
+                    int xVidaEnemigo=pMago.Vida-(xDañoElemento-xDefensaMago);
+                    pMago.Vida=xVidaEnemigo;
+                }
+            }
+        }
+        public static Enano GetPersonaje(string nombre)
+        {
+            return personajes.Find(match => match.Nombre == nombre.Trim());
+        }
+        public static List<Enano> GetPersonajes()
+        {
+            return personajes;
         }
 
     }
