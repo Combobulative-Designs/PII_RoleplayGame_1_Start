@@ -32,6 +32,11 @@ namespace Library
             personajes.Add(this);
         }
 
+        ~Arquero()
+        {
+            personajes.Remove(this);
+        }
+
         /// <summary>
         /// Des-equipar un item del personaje.
         /// </summary>
