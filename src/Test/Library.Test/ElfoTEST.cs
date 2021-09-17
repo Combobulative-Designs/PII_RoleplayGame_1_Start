@@ -23,7 +23,7 @@ namespace Test.Library
             Elfo Elfo_prueba2 = new Elfo("Malisii",90);
             
             Elemento Hacha = new Elemento("Hacha",0,100,0);
-            int itemCount = arquero.Items.Count;
+            int itemCount = Elfo_prueba2.Items.Count;
             Elfo_prueba2.AgregarElemento(Hacha);
 
             Assert.AreEqual((itemCount + 1), Elfo_prueba2.Items.Count);
