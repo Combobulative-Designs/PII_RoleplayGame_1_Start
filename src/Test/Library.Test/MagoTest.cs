@@ -213,8 +213,29 @@ namespace Test.Library
             Assert.AreEqual(vidaRestante, mago1.Vida);
         }
 
+        [Test]
+        public void TestCalcularAtaque()
+        {
+            int vidaInicial = 100;
+            double pot1 = 1.2;
+            double pot2 = 1.05;
+            double pot3 = 1.11;
+            int dañoHechizo = 40;
+            int dañoEsperado = (int)(dañoHechizo * (pot1 * pot2 * pot3));
 
+            var mago1 = new Mago("mago1", vidaInicial);
+            var elemento1 = new Elemento("el1", pot1, 0, 0);
+            var elemento2 = new Elemento("el2", pot2, 0, 0);
+            var elemento3 = new Elemento("el3", pot3, 0, 0);
+            mago1.AgregarElemento(elemento1);
+            mago1.AgregarElemento(elemento2);
+            mago1.AgregarElemento(elemento3);
+            var hechizo1 = new Hechizo("hec1", dañoHechizo);
 
+            int dañoCalculado = this.CalcularAtaque(hechizo1);
 
+            Assert.AreEqual(dañoEsperado, dañoCalculado);
+        }
+        
     }
 }
