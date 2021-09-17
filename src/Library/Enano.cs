@@ -39,7 +39,7 @@ namespace Library
         /// Des-equipar un item del personaje.
         /// </summary>
         /// <param name="pElemento">Elemento: item a des-equipar.</param>
-        public void QuitarElemetno(Elemento pElemento)
+        public void QuitarElemento(Elemento pElemento)
         {
            if(this.Items.Contains(pElemento))
            {
