@@ -23,7 +23,12 @@ namespace Test.Library
             Elfo Elfo_prueba2 = new Elfo("Malisii",90);
             
             Elemento Hacha = new Elemento("Hacha",0,100,0);
+            int itemCount = arquero.Items.Count;
             Elfo_prueba2.AgregarElemento(Hacha);
+
+            Assert.AreEqual((itemCount + 1), Elfo_prueba2.Items.Count);
+            Assert.Contains(Hacha, Elfo_prueba2.Items);
+
 
 
 
@@ -37,7 +42,7 @@ namespace Test.Library
             Elemento Hacha2 = new Elemento("Hacha2",0,100,0);
             Elfo_prueba3.AgregarElemento(Hacha2);
 
-            Elfo_prueba3.Quitar_elemento(Hacha2);
+            Elfo_prueba3.QuitarElemento(Hacha2);
 
             
         }
@@ -51,10 +56,10 @@ namespace Test.Library
             Elfo Elfo_prueba0 = new Elfo("Soldi",150);
             Elemento Hacha3 = new Elemento("Hacha3",0,10,0);
             Elfo_prueba0.AgregarElemento(Hacha3);
-            Elfo_prueba0.Atacar_arquero(Hacha3,prueba_arquero);
+            Elfo_prueba0.Ataque(Hacha3,prueba_arquero);
 
 
-            Assert.AreEqual(vida_arquero_restante,prueba_arquero.vida);
+            Assert.AreEqual(vida_arquero_restante,prueba_arquero.Vida);
 
 
             
@@ -68,9 +73,9 @@ namespace Test.Library
             Elfo Elfo_prueba4 = new Elfo("Soldi",150);
             Elemento Hacha4 = new Elemento("Hacha4",0,30,0);
             Elfo_prueba4.AgregarElemento(Hacha4);
-            Elfo_prueba4.Atacar_enano(Hacha4,prueba_enano);
+            Elfo_prueba4.Ataque(Hacha4,prueba_enano);
 
-            Assert.AreEqual(vida_enano,prueba_enano.vida);
+            Assert.AreEqual(vida_enano,prueba_enano.Vida);
 
         }
 
@@ -80,13 +85,13 @@ namespace Test.Library
         {
             int vida_mago = 40;
 
-            Enano prueba_mago = new Enano("Magin",80);
+            Mago prueba_mago = new Mago("Magin",80);
             Elfo Elfo_prueba5 = new Elfo("Lofio",100);
             Elemento Hacha5 = new Elemento("Hacha5",0,40,0);
             Elfo_prueba5.AgregarElemento(Hacha5);
-            Elfo_prueba5.Atacar_enano(Hacha5,prueba_mago);
+            Elfo_prueba5.Ataque(Hacha5,prueba_mago);
 
-            Assert.AreEqual(vida_mago,prueba_mago.vida);
+            Assert.AreEqual(vida_mago,prueba_mago.Vida);
 
         }
 
@@ -95,13 +100,13 @@ namespace Test.Library
         {
             int vida_elfo = 40;
 
-            Enano prueba_elfo_atacado = new Enano("Dolos",100);
+            Elfo prueba_elfo_atacado = new Elfo("Dolos",100);
             Elfo Elfo_prueba6 = new Elfo("Kay",120);
             Elemento Hacha6 = new Elemento("Hacha6",0,50,0);
             Elfo_prueba6.AgregarElemento(Hacha6);
-            Elfo_prueba6.Atacar_enano(Hacha6,prueba_elfo_atacado);
+            Elfo_prueba6.Ataque(Hacha6,prueba_elfo_atacado);
 
-            Assert.AreEqual(vida_elfo,prueba_elfo_atacado.vida);
+            Assert.AreEqual(vida_elfo,prueba_elfo_atacado.Vida);
 
 
         }
@@ -109,7 +114,7 @@ namespace Test.Library
         public void Testheal()
         {
             Elfo prueba_elfo7 = new Elfo("Malto",200);
-            prueba_elfo7.vida = 0;
+            prueba_elfo7.Vida = 0;
             prueba_elfo7.Heal();
 
             Assert.AreEqual(prueba_elfo7.VidaInicial, prueba_elfo7.Vida);
