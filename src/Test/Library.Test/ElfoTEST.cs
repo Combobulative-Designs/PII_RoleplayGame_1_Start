@@ -98,7 +98,7 @@ namespace Test.Library
         [Test]
         public void atacar_elfo()
         {
-            int vida_elfo = 40;
+            int vida_elfo = 50;
 
             Elfo prueba_elfo_atacado = new Elfo("Dolos",100);
             Elfo Elfo_prueba6 = new Elfo("Kay",120);
