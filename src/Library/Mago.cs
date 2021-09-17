@@ -174,6 +174,5 @@ namespace Library
         {
             return personajes;
         }
-
-    }
+     }
 }
