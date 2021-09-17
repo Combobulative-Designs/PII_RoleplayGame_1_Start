@@ -232,7 +232,7 @@ namespace Test.Library
             mago1.AgregarElemento(elemento3);
             var hechizo1 = new Hechizo("hec1", dañoHechizo);
 
-            int dañoCalculado = this.CalcularAtaque(hechizo1);
+            int dañoCalculado = mago1.CalcularAtaque(hechizo1);
 
             Assert.AreEqual(dañoEsperado, dañoCalculado);
         }
